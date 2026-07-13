@@ -1,93 +1,47 @@
+## 📁 Project Structure
+
+```text
 signbridge-ai/
 │
-├── frontend/                          # React + TypeScript + Tailwind
-│   ├── public/
-│   │   └── assets/
+├── frontend/                     # React + TypeScript + TailwindCSS
 │   ├── src/
-│   │   ├── components/
-│   │   │   ├── webcam/
-│   │   │   │   ├── WebcamFeed.tsx
-│   │   │   │   └── LandmarkOverlay.tsx
-│   │   │   ├── translation/
-│   │   │   │   ├── SignToText.tsx
-│   │   │   │   ├── TextToSign.tsx
-│   │   │   │   └── ConfidenceMeter.tsx
-│   │   │   ├── avatar/
-│   │   │   │   └── SignAvatar3D.tsx       # Three.js
-│   │   │   ├── conversation/
-│   │   │   │   └── ConversationMode.tsx
-│   │   │   ├── layout/
-│   │   │   │   ├── Sidebar.tsx
-│   │   │   │   ├── Navbar.tsx
-│   │   │   │   └── ThemeToggle.tsx
-│   │   │   └── ui/                        # buttons, cards, modals (shared)
-│   │   ├── hooks/
-│   │   │   ├── useWebcam.ts
-│   │   │   ├── useWebSocket.ts
-│   │   │   ├── useSpeechRecognition.ts
-│   │   │   └── useMediaPipe.ts
-│   │   ├── pages/
-│   │   │   ├── Dashboard.tsx
-│   │   │   ├── LiveTranslate.tsx
-│   │   │   ├── Conversation.tsx
-│   │   │   └── Settings.tsx
-│   │   ├── services/
-│   │   │   ├── api.ts
-│   │   │   └── websocket.ts
-│   │   ├── store/                         # state management (Zustand)
+│   │   ├── components/           # Reusable UI components
+│   │   │   ├── webcam/           # Live webcam & landmark overlay
+│   │   │   ├── translation/      # Sign ↔ Text interface
+│   │   │   ├── avatar/           # 3D sign language avatar
+│   │   │   ├── conversation/     # Live conversation mode
+│   │   │   ├── layout/           # Navbar, Sidebar, Theme
+│   │   │   └── ui/               # Shared UI components
+│   │   ├── hooks/                # Custom React hooks
+│   │   ├── pages/                # Application pages
+│   │   ├── services/             # API & WebSocket clients
+│   │   ├── store/                # Zustand state management
 │   │   ├── types/
 │   │   ├── styles/
 │   │   ├── App.tsx
 │   │   └── main.tsx
-│   ├── package.json
-│   ├── tailwind.config.ts
-│   └── tsconfig.json
+│   └── package.json
 │
-├── backend/                           # Python + FastAPI
+├── backend/                      # FastAPI Backend
 │   ├── app/
-│   │   ├── main.py                        # FastAPI entrypoint
-│   │   ├── api/
-│   │   │   ├── routes_translate.py
-│   │   │   ├── routes_speech.py
-│   │   │   └── routes_ws.py               # WebSocket for live stream
-│   │   ├── core/
-│   │   │   ├── config.py                  # env vars
-│   │   │   └── logger.py
-│   │   ├── ml/
-│   │   │   ├── landmark_extractor.py      # MediaPipe wrapper
-│   │   │   ├── sequence_buffer.py
-│   │   │   ├── sign_recognizer.py         # model inference
-│   │   │   ├── sentence_builder.py        # grammar/punct logic
-│   │   │   └── model_loader.py
-│   │   ├── speech/
-│   │   │   ├── stt.py                     # Whisper wrapper
-│   │   │   └── tts.py                     # Piper/Coqui wrapper
-│   │   └── schemas/
-│   │       └── translation.py             # Pydantic models
+│   │   ├── api/                  # REST & WebSocket routes
+│   │   ├── core/                 # Configuration & logging
+│   │   ├── ml/                   # AI inference pipeline
+│   │   ├── speech/               # Speech-to-Text & Text-to-Speech
+│   │   ├── schemas/              # Pydantic models
+│   │   └── main.py
 │   ├── requirements.txt
 │   └── .env.example
 │
-├── models/
-│   ├── sign_recognition/
-│   │   ├── train.py
-│   │   ├── model_def.py                   # LSTM/GRU architecture
-│   │   └── checkpoints/
-│   └── README.md
+├── models/                       # Model training & checkpoints
 │
-├── datasets/
-│   ├── loaders/
-│   │   ├── wlasl_loader.py
-│   │   └── base_loader.py                 # abstraction layer
-│   └── README.md
+├── datasets/                     # Dataset loaders & preprocessing
 │
-├── animations/
-│   └── gesture_library/                   # pre-recorded landmark sequences
+├── animations/                   # Gesture animation library
 │
-├── docs/
-│   ├── ARCHITECTURE.md
-│   ├── API.md
-│   └── DEPLOYMENT.md
+├── docs/                         # Architecture & API documentation
 │
 ├── .gitignore
 ├── docker-compose.yml
 └── README.md
+```
