@@ -6,6 +6,7 @@ python-dotenv==1.0.1
 websockets==13.1
 python-multipart==0.0.9
 
+<<<<<<< HEAD
 # MediaPipe: PINNED to 0.10.14 deliberately. Versions 0.10.18+ removed the
 # legacy `mp.solutions.holistic` API (used for pose+hands+face landmarks)
 # in favor of a different Tasks API. Do not bump this without rewriting
@@ -17,3 +18,11 @@ numpy==1.26.4
 # Added in later steps (kept here so the file matches final scope):
 # torch==2.4.1
 # openai-whisper==20231117
+=======
+# Added in later steps (kept here so the file matches final scope):
+# mediapipe==0.10.14
+# opencv-python-headless==4.10.0.84
+# numpy==1.26.4
+# torch==2.4.1
+# openai-whisper==20231117
+>>>>>>> 9ea30ab834dabbb555cbe068c6f6ae1797f9143a

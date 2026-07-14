@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """
 SignBridge AI - FastAPI entrypoint.
 
@@ -11,6 +12,12 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api import routes_translate, routes_ws
+=======
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from app.api import routes_translate
+>>>>>>> 9ea30ab834dabbb555cbe068c6f6ae1797f9143a
 from app.core.config import settings
 from app.core.logger import get_logger
 
@@ -31,9 +38,15 @@ app.add_middleware(
 )
 
 app.include_router(routes_translate.router)
+<<<<<<< HEAD
 app.include_router(routes_ws.router)
 
 # Routers added in later steps:
+=======
+
+# Routers added in later steps:
+#   routes_ws        - live webcam landmark streaming        (Step 2)
+>>>>>>> 9ea30ab834dabbb555cbe068c6f6ae1797f9143a
 #   routes_speech     - speech-to-text / text-to-speech        (Step 7)
 
 
@@ -53,4 +66,8 @@ async def root() -> dict:
         "message": f"{settings.app_name} API is running",
         "docs": "/docs",
         "status_endpoint": "/api/v1/status",
+<<<<<<< HEAD
     }
+=======
+    }
+>>>>>>> 9ea30ab834dabbb555cbe068c6f6ae1797f9143a

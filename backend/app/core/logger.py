@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """
 Application-wide logger setup.
 
@@ -5,6 +6,8 @@ Import `get_logger(__name__)` in any module instead of configuring
 logging ad hoc, so log format/level stays consistent across the app.
 """
 
+=======
+>>>>>>> 9ea30ab834dabbb555cbe068c6f6ae1797f9143a
 import logging
 import sys
 
@@ -33,4 +36,8 @@ _configure_root_logger()
 
 
 def get_logger(name: str) -> logging.Logger:
+<<<<<<< HEAD
     return logging.getLogger(name)
+=======
+    return logging.getLogger(name)
+>>>>>>> 9ea30ab834dabbb555cbe068c6f6ae1797f9143a

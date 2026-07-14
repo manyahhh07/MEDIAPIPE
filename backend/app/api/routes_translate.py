@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """
 HTTP routes for translation.
 
@@ -7,6 +8,8 @@ returning fake data - they'll be wired to real logic in Step 4 (sign
 recognition) and Step 6 (text-to-sign).
 """
 
+=======
+>>>>>>> 9ea30ab834dabbb555cbe068c6f6ae1797f9143a
 from fastapi import APIRouter, HTTPException, status
 
 from app.core.config import settings
@@ -43,4 +46,8 @@ async def text_to_sign(payload: TextToSignRequest) -> TextToSignResponse:
     raise HTTPException(
         status_code=status.HTTP_501_NOT_IMPLEMENTED,
         detail="Text-to-sign translation is implemented in Step 6.",
+<<<<<<< HEAD
     )
+=======
+    )
+>>>>>>> 9ea30ab834dabbb555cbe068c6f6ae1797f9143a

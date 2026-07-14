@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """
 Centralized application configuration.
 
@@ -7,6 +8,8 @@ import `settings` from this module instead, so every value has one source
 of truth and is validated at startup.
 """
 
+=======
+>>>>>>> 9ea30ab834dabbb555cbe068c6f6ae1797f9143a
 from functools import lru_cache
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -37,10 +40,13 @@ class Settings(BaseSettings):
         env_file=".env",
         env_file_encoding="utf-8",
         extra="ignore",
+<<<<<<< HEAD
         # model_checkpoint_path starts with "model_", which pydantic warns
         # about by default (it reserves that prefix for its own internals).
         # It's not actually a conflict here, so we disable the check.
         protected_namespaces=(),
+=======
+>>>>>>> 9ea30ab834dabbb555cbe068c6f6ae1797f9143a
     )
 
     @property
@@ -59,4 +65,8 @@ def get_settings() -> Settings:
     return Settings()
 
 
+<<<<<<< HEAD
 settings = get_settings()
+=======
+settings = get_settings()
+>>>>>>> 9ea30ab834dabbb555cbe068c6f6ae1797f9143a
