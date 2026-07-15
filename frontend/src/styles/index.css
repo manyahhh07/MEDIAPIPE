@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+
+  body {
+    @apply font-sans text-ink dark:text-ink-dark bg-canvas dark:bg-canvas-dark transition-colors duration-150;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+
+  /* Visible keyboard focus everywhere - required for an accessibility product to not be hypocritical about it. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent-500 ring-offset-2 ring-offset-canvas dark:ring-offset-canvas-dark;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .large-text {
+    font-size: 1.15em;
+  }
+
+  .high-contrast {
+    --tw-text-opacity: 1;
+  }
+
+  .high-contrast.dark {
+    background-color: #000000;
+    color: #FFFFFF;
+  }
+
+  .high-contrast:not(.dark) {
+    background-color: #FFFFFF;
+    color: #000000;
+  }
+}

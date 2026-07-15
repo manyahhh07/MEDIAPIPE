@@ -29,10 +29,17 @@ from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 
 from app.core.logger import get_logger
 from app.ml.landmark_extractor import LandmarkExtractor
+from app.ml.sentence_builder import SentenceBuilder
 from app.ml.sequence_buffer import SequenceBuffer
+from app.ml.sign_recognizer import SignRecognizer
 
 router = APIRouter()
 logger = get_logger(__name__)
+
+# The model is heavy to construct (builds an LSTM + loads/initializes
+# weights). One shared instance is safe because inference is stateless -
+# unlike LandmarkExtractor/SequenceBuffer, nothing here is per-connection.
+_recognizer = SignRecognizer()
 
 
 def _decode_frame(b64_data: str) -> np.ndarray | None:
@@ -57,10 +64,16 @@ async def websocket_translate(websocket: WebSocket) -> None:
 
     extractor = LandmarkExtractor()
     buffer = SequenceBuffer()
+    sentence_builder = SentenceBuilder()
 
     try:
         while True:
             payload = await websocket.receive_json()
+
+            if payload.get("type") == "end_sentence":
+                final = sentence_builder.snapshot_and_reset()
+                await websocket.send_json({"type": "sentence_complete", "sentence": final})
+                continue
 
             if payload.get("type") != "frame":
                 await websocket.send_json(
@@ -89,9 +102,24 @@ async def websocket_translate(websocket: WebSocket) -> None:
 
             if buffer.has_enough_signal():
                 await websocket.send_json({"type": "ready_for_prediction"})
-                # Step 4 will replace this comment with a call into
-                # sign_recognizer.py using buffer.get_window(), then
-                # buffer.clear() (or a sliding partial-clear) afterward.
+
+                gloss, confidence = _recognizer.predict(buffer.get_window())
+                buffer.clear()
+
+                if gloss is not None:
+                    sentence_builder.add_word(gloss)
+                    await websocket.send_json(
+                        {
+                            "type": "prediction",
+                            "gloss": gloss,
+                            "confidence": confidence,
+                            "sentence_so_far": sentence_builder.build(),
+                        }
+                    )
+                else:
+                    await websocket.send_json(
+                        {"type": "prediction_below_threshold", "confidence": confidence}
+                    )
 
     except WebSocketDisconnect:
         logger.info("WebSocket disconnected: %s", websocket.client)
