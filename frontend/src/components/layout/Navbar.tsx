@@ -4,6 +4,9 @@ import { ThemeToggle } from "./ThemeToggle";
 const LINKS = [
   { to: "/", label: "Dashboard" },
   { to: "/translate", label: "Live Translate" },
+  { to: "/text-to-sign", label: "Text to Sign" },
+  { to: "/conversation", label: "Conversation" },
+  { to: "/settings", label: "Settings" },
 ];
 
 export function Navbar() {
