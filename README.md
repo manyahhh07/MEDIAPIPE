@@ -5,8 +5,6 @@ Real-time translation between sign language and spoken/written language.
 This README tracks two things: the **target structure** the full product
 is being built toward, and the **current progress** against it.
 
----
-
 ## Target Structure
 
 ```
